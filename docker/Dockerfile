@@ -116,10 +116,11 @@ COPY --chown=${USERNAME}:${USERNAME} scripts/zshrc-template /home/${USERNAME}/.z
 RUN cp /home/${USERNAME}/.zshrc /root/.zshrc
 
 # =============================================================================
-# 7. 複製啟動腳本
+# 7. 複製啟動腳本（須放在 /usr/local/bin/ 確保 root 也能執行）
 # =============================================================================
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY scripts/bootstrap.sh  /usr/local/bin/bootstrap.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/bootstrap.sh
 
 # =============================================================================
 # 8. 設定工作目錄與使用者
