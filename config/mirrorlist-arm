@@ -1,0 +1,24 @@
+# Arch Linux ARM mirror list (aarch64)
+# 由 arch-chroot-install.sh 複製至 /etc/pacman.d/mirrorlist
+#
+# 地理位置由近至遠排列，建議保留最近的 3–5 個 mirror
+# 完整清單：https://archlinuxarm.org/about/mirrors
+
+# ---- 台灣 ----
+Server = http://archlinuxarm.org/os/$arch
+
+# ---- 亞太區（日本）----
+Server = http://ftp.jaist.ac.jp/pub/Linux/ArchLinux-ARM/$arch/$repo
+
+# ---- 亞太區（韓國）----
+Server = http://mirror.premi.st/archlinuxarm/$arch/$repo
+
+# ---- 亞太區（新加坡）----
+Server = http://mirror.sg.gs/archlinuxarm/$arch/$repo
+
+# ---- 歐洲備援 ----
+Server = http://mirror.archlinuxarm.org/$arch/$repo
+Server = http://de.mirror.archlinuxarm.org/$arch/$repo
+
+# ---- 官方主站（最後備援）----
+Server = http://archlinuxarm.org/$arch/$repo
