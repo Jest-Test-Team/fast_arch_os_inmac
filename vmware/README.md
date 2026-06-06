@@ -6,12 +6,28 @@
 
 ## 前置需求
 
-| 需求 | 說明 |
+| 需求 | 版本 / 說明 |
 |---|---|
-| VMware Fusion 13+ | [Broadcom 下載頁](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion)，免費個人授權 |
-| Alpine Linux aarch64 ISO | [下載最新版](https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/)，選 `alpine-virt-*-aarch64.iso`（約 60 MB） |
+| **VMware Fusion** | **13.6.4 (Build 533271)** — [Broadcom 下載頁](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion)，選 Release **13.6.4**，免費個人授權 |
+| **Alpine Linux ISO** | **alpine-virt-3.23.4-aarch64.iso**（90 MB）— [直接下載](https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/alpine-virt-3.23.4-aarch64.iso)，`virt` 版專為虛擬機最佳化 |
 | 磁碟空間 | 至少 30 GB 可用空間 |
 | 記憶體 | 建議分配給 VM 至少 2 GB（4 GB 更佳） |
+
+### 為何選 VMware Fusion 13.6.4？
+
+- 目前 M1/M2/M3 上 ARM64 Linux VM 支援最穩定的版本
+- `linux-aarch64` kernel 相容性最佳
+- Arch Linux ARM 社群安裝指南以此版本為基礎
+- 個人使用完全免費（需 Broadcom 帳號）
+
+### 為何選 alpine-virt ISO？
+
+| 類型 | 大小 | 說明 |
+|---|---|---|
+| **alpine-virt-3.23.4** | 90 MB | **推薦**：針對 VM/Hypervisor 最佳化，無多餘硬體驅動 |
+| alpine-standard-3.23.4 | 373 MB | 完整版，包含多餘的實體機驅動 |
+| alpine-minirootfs | 4 MB | 非 ISO，無法作為開機媒介 |
+| alpine-rpi | 87 MB | Raspberry Pi 專用，VMware 不相容 |
 
 ---
 
