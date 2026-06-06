@@ -117,7 +117,7 @@ sh /tmp/arch-install.sh
 
 ---
 
-## 步驟五：首次開機
+## 步驟六：首次開機
 
 1. 安裝完成後，輸入 `poweroff` 關機
 2. 在 VMware Fusion 設定中，**卸除 Alpine ISO**（CD/DVD → Disconnect）
