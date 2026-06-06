@@ -25,7 +25,7 @@ todos:
     status: completed
   - id: docker-scripts
     content: "[Docker 次之] 建立 docker/scripts/entrypoint.sh 與 bootstrap.sh"
-    status: in_progress
+    status: completed
 isProject: false
 ---
 
