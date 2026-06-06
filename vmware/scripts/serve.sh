@@ -35,24 +35,28 @@ command -v python3 >/dev/null 2>&1 || die "找不到 python3，請安裝 Homebre
 # --------------------------------------------------------------------------
 info "偵測 VMware NAT 網路介面..."
 
-HOST_IP=""
-for iface in vmnet8 vmnet1 vmnet2; do
-  IP=$(ipconfig getifaddr "$iface" 2>/dev/null || true)
-  if [ -n "$IP" ]; then
-    HOST_IP="$IP"
-    info "找到 VMware 介面 $iface → $IP"
-    break
-  fi
-done
+HOST_IP="${HOST_IP:-}"
+if [ -z "$HOST_IP" ]; then
+  for iface in vmnet8 vmnet1 vmnet2; do
+    IP=$(ipconfig getifaddr "$iface" 2>/dev/null || true)
+    if [ -n "$IP" ]; then
+      HOST_IP="$IP"
+      info "找到 VMware 介面 $iface → $IP"
+      break
+    fi
+  done
+else
+  info "使用手動指定 HOST_IP → ${HOST_IP}"
+fi
 
 if [ -z "$HOST_IP" ]; then
   warn "找不到 vmnet 介面，嘗試用 en0 (Wi-Fi)..."
   HOST_IP=$(ipconfig getifaddr en0 2>/dev/null || true)
   [ -n "$HOST_IP" ] || die "無法取得任何 IP。請確認 VMware Fusion 已開啟，或手動設定 HOST_IP=<IP> 後重跑"
-  warn "使用 en0 IP $HOST_IP（需確認 VM 網路模式為 Bridged）"
+  warn "使用 en0 IP ${HOST_IP}（需確認 VM 網路模式為 Bridged）"
 fi
 
-success "Mac IP：$HOST_IP:$PORT"
+success "Mac IP：${HOST_IP}:${PORT}"
 
 # --------------------------------------------------------------------------
 # 確認 post-install.sh 存在
