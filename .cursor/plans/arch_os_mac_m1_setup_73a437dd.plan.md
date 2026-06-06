@@ -13,13 +13,13 @@ todos:
     status: completed
   - id: config-files
     content: 建立 config/ 目錄下的 pacman.conf、mirrorlist-arm、locale.gen
-    status: in_progress
+    status: completed
   - id: makefile
     content: "[Docker 次之] 建立根目錄 Makefile — 封裝 docker build/up/shell/clean 等指令"
-    status: pending
+    status: completed
   - id: dockerfile
     content: "[Docker 次之] 建立 docker/Dockerfile — 基於 archlinux/archlinux:base-devel (ARM64)"
-    status: pending
+    status: in_progress
   - id: compose
     content: "[Docker 次之] 建立 docker/docker-compose.yml — 含 volume、platform、tty 設定"
     status: pending
