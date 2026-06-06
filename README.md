@@ -22,8 +22,29 @@
 - 至少 8 GB 可用記憶體，30 GB 可用磁碟空間
 
 ### Path 1 — VMware Fusion
-- [VMware Fusion 13+](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion)（免費個人授權）
-- [Alpine Linux aarch64 miniISO](https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/)（作為安裝媒介，約 150 MB）
+
+**VMware Fusion 版本選擇：**
+
+| 版本 | Build | 建議 |
+|---|---|---|
+| **13.6.4** | **533271** | **推薦** — M1/M2/M3 ARM64 VM 支援最穩定 |
+| 25H2 / 26H1 | — | 可用，但社群資源較少 |
+| 13.5.2 以下 | — | 不建議，ARM64 相容性問題 |
+
+- 下載：[Broadcom VMware Fusion 13.6.4 (Build 533271)](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion)，選 **Release 13.6.4**，免費個人授權
+
+**Alpine Linux ISO 選擇：**
+
+| 類型 | 檔名 | 適合 VMware？ |
+|---|---|---|
+| **alpine-virt-\*** | **alpine-virt-3.23.4-aarch64.iso** | **是（首選）** — 專為 VM 最佳化，90 MB |
+| alpine-standard-\* | alpine-standard-3.23.4-aarch64.iso | 可用，但 373 MB |
+| alpine-minirootfs-\* | *.tar.gz | 否，非可開機 ISO |
+| alpine-rpi-\* | *.img | 否，Raspberry Pi 專用 |
+| alpine-uboot-\* | *.tar.gz | 否，嵌入式裝置用 |
+| alpine-netboot-\* | *.tar.gz | 否，需 PXE 環境 |
+
+- 下載：[alpine-virt-3.23.4-aarch64.iso](https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/alpine-virt-3.23.4-aarch64.iso)（90 MB，作為安裝媒介）
 
 ### Path 2 — Docker
 - [Docker Desktop for Apple Silicon](https://www.docker.com/products/docker-desktop/)
