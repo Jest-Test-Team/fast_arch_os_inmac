@@ -1,0 +1,91 @@
+# =============================================================================
+# docker-compose.yml — Arch Linux ARM (aarch64) 開發環境
+# 適用：Mac M1 (ARM64) + Docker Desktop (Apple Silicon)
+# =============================================================================
+
+services:
+  arch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: arch
+        USER_UID: "1000"
+        USER_GID: "1000"
+        TZ: Asia/Taipei
+
+    # 強制使用 ARM64 原生執行（M1 不需要模擬）
+    platform: linux/arm64
+
+    image: fast-arch:latest
+    container_name: arch-dev
+
+    # 保持 stdin 開啟與 TTY 分配（互動式 shell 必要）
+    stdin_open: true
+    tty: true
+
+    # 重新啟動策略：除非手動停止，否則自動重啟
+    restart: unless-stopped
+
+    volumes:
+      # 持久化使用者家目錄（跨容器重建保留設定）
+      - arch-home:/home/arch
+
+      # 持久化 pacman 套件快取（避免重複下載）
+      - arch-pacman-cache:/var/cache/pacman/pkg
+
+      # 掛載專案根目錄到容器內的 /workspace
+      - ..:/workspace:cached
+
+      # 掛載 SSH key（唯讀，用於 git push）
+      - type: bind
+        source: ${HOME}/.ssh
+        target: /home/arch/.ssh
+        read_only: true
+        # 若 .ssh 目錄不存在則跳過（避免報錯）
+        bind:
+          create_host_path: false
+
+    # 環境變數
+    environment:
+      - LANG=en_US.UTF-8
+      - TZ=Asia/Taipei
+      - TERM=xterm-256color
+      # 可在 .env 檔案中覆寫以下變數
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GOPATH=/home/arch/go
+      - PATH=/home/arch/go/bin:/home/arch/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin
+
+    # 若需要 SSH server 或其他服務，可開啟 port forward
+    # ports:
+    #   - "2222:22"    # SSH
+    #   - "8080:8080"  # HTTP dev server
+
+    # 共享 Mac 的 DNS 設定（可選，確保 DNS 解析一致）
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+    # 限制資源使用（可依需求調整）
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 512M
+
+# =============================================================================
+# Volumes（具名 volume，由 Docker 管理，跨容器重建持久保存）
+# =============================================================================
+volumes:
+  arch-home:
+    name: arch-dev-home
+    labels:
+      project: fast-arch
+      description: "Arch Linux 使用者家目錄（持久化）"
+
+  arch-pacman-cache:
+    name: arch-dev-pacman-cache
+    labels:
+      project: fast-arch
+      description: "pacman 套件快取（加速重複安裝）"
