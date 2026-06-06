@@ -24,6 +24,16 @@ success() { printf '\033[1;32m[OK]\033[0m   %s\n' "$*"; }
 warn()    { printf '\033[1;33m[WARN]\033[0m %s\n' "$*"; }
 die()     { printf '\033[1;31m[ERR]\033[0m  %s\n' "$*"; exit 1; }
 
+get_iface_ip() {
+  local iface="$1"
+  local ip=""
+  ip=$(ipconfig getifaddr "$iface" 2>/dev/null || true)
+  if [ -z "$ip" ]; then
+    ip=$(ifconfig "$iface" 2>/dev/null | awk '/inet / {print $2; exit}' || true)
+  fi
+  printf '%s' "$ip"
+}
+
 # --------------------------------------------------------------------------
 # 確認在 macOS 上執行
 # --------------------------------------------------------------------------
@@ -37,8 +47,8 @@ info "偵測 VMware NAT 網路介面..."
 
 HOST_IP="${HOST_IP:-}"
 if [ -z "$HOST_IP" ]; then
-  for iface in vmnet8 vmnet1 vmnet2; do
-    IP=$(ipconfig getifaddr "$iface" 2>/dev/null || true)
+  for iface in vmnet8 vmnet1 vmnet2 bridge100 bridge101; do
+    IP=$(get_iface_ip "$iface")
     if [ -n "$IP" ]; then
       HOST_IP="$IP"
       info "找到 VMware 介面 $iface → $IP"
@@ -51,7 +61,7 @@ fi
 
 if [ -z "$HOST_IP" ]; then
   warn "找不到 vmnet 介面，嘗試用 en0 (Wi-Fi)..."
-  HOST_IP=$(ipconfig getifaddr en0 2>/dev/null || true)
+  HOST_IP=$(get_iface_ip en0)
   [ -n "$HOST_IP" ] || die "無法取得任何 IP。請確認 VMware Fusion 已開啟，或手動設定 HOST_IP=<IP> 後重跑"
   warn "使用 en0 IP ${HOST_IP}（需確認 VM 網路模式為 Bridged）"
 fi
