@@ -83,11 +83,19 @@ fast_arch_os_inmac/
 詳見 [vmware/README.md](vmware/README.md)。
 
 ```bash
-# 1. 安裝 VMware Fusion 13（免費個人版）
-# 2. 下載 Alpine Linux aarch64 ISO
-# 3. 建立 VM，掛載 ISO 開機
+# 1. 安裝 VMware Fusion 13.6.4 (Build 533271)（免費個人版）
+#    https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion
+#
+# 2. 下載 Alpine Linux virt ISO (aarch64)
+#    https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/aarch64/alpine-virt-3.23.4-aarch64.iso
+#
+# 3. 建立 VM（Other Linux 6.x 64-bit ARM，UEFI，≥30 GB 磁碟，≥2 GB RAM）
+#    掛載 Alpine ISO 為 CD/DVD，啟動進入 live 環境
+#
 # 4. 在 Alpine live 環境內執行安裝腳本
-wget -qO- https://raw.githubusercontent.com/your-repo/fast_arch_os_inmac/main/vmware/scripts/arch-chroot-install.sh | sh
+wget -O /tmp/arch-install.sh \
+  https://raw.githubusercontent.com/your-repo/fast_arch_os_inmac/main/vmware/scripts/arch-chroot-install.sh
+sh /tmp/arch-install.sh
 ```
 
 ### Path 2 — Docker
