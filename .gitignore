@@ -2,3 +2,13 @@ auto_commit.sh
 /.cursor
 /.cursor/plans
 /.cursor
+
+# 下載的 ISO 與 rootfs（體積大，不放進 git）
+/downloads/
+
+# Docker 環境變數（含 token，不放進 git）
+.env
+
+# macOS 系統檔
+.DS_Store
+**/.DS_Store
