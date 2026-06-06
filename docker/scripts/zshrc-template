@@ -1,0 +1,96 @@
+# =============================================================================
+# zshrc-template — 容器內 arch 使用者的 zsh 設定
+# 複製至 /home/arch/.zshrc（由 Dockerfile COPY 指令執行）
+# =============================================================================
+
+# --------------------------------------------------------------------------
+# 基本設定
+# --------------------------------------------------------------------------
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR=vim
+export VISUAL=vim
+export TERM=xterm-256color
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
+
+# --------------------------------------------------------------------------
+# Prompt（輕量無需 oh-my-zsh）
+# --------------------------------------------------------------------------
+autoload -Uz colors && colors
+setopt PROMPT_SUBST
+
+# 顯示：使用者@主機 當前路徑 git分支 $
+PROMPT='%F{cyan}%n%f@%F{magenta}arch%f %F{yellow}%~%f%F{green}$(git_branch)%f %# '
+
+git_branch() {
+  local branch
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null) && echo " ($branch)"
+}
+
+# --------------------------------------------------------------------------
+# 歷史設定
+# --------------------------------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+
+# --------------------------------------------------------------------------
+# 自動補全
+# --------------------------------------------------------------------------
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# --------------------------------------------------------------------------
+# 插件（若已安裝）
+# --------------------------------------------------------------------------
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# --------------------------------------------------------------------------
+# Alias
+# --------------------------------------------------------------------------
+alias ll='ls -lah --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# pacman 快捷
+alias pacup='sudo pacman -Syu'
+alias pacin='sudo pacman -S'
+alias pacse='pacman -Ss'
+alias pacre='sudo pacman -Rns'
+alias pacinfo='pacman -Qi'
+
+# yay AUR 快捷
+alias yayup='yay -Syu'
+alias yayin='yay -S'
+
+# git 快捷
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate --all'
+alias gd='git diff'
+
+# 容器資訊
+alias sysinfo='uname -a && cat /etc/os-release'
+alias ports='ss -tlnp'
+
+# --------------------------------------------------------------------------
+# 歡迎訊息（非互動式 shell 跳過）
+# --------------------------------------------------------------------------
+if [[ $- == *i* ]]; then
+  echo "  Arch Linux ARM ($(uname -m)) | $(date '+%Y-%m-%d %H:%M')"
+  echo "  workspace: /workspace"
+fi
