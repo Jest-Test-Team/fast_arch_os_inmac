@@ -101,7 +101,7 @@ sh /tmp/arch-install.sh
 
 ---
 
-## 步驟四：chroot 後系統設定
+## 步驟五：chroot 後系統設定
 
 `arch-chroot-install.sh` 執行完畢後，會自動呼叫 `post-install.sh`，設定：
 
