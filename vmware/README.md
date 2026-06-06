@@ -57,12 +57,12 @@ bash vmware/scripts/download-deps.sh
 5. 建立新虛擬磁碟，大小 ≥ **30 GB**（建議 NVME 模式）
 6. 完成後，進入 VM 設定：
    - **Processors & Memory**：CPU ≥ 2 核心，Memory ≥ 2048 MB
-   - **CD/DVD**：勾選「Connect CD/DVD Drive」，選擇剛才下載的 Alpine ISO
+   - **CD/DVD**：勾選「Connect CD/DVD Drive」，選擇 `downloads/alpine-virt-3.23.4-aarch64.iso`
 7. 啟動 VM，進入 Alpine Linux live 環境
 
 ---
 
-## 步驟二：進入 Alpine live 環境
+## 步驟三：進入 Alpine live 環境
 
 開機後以 `root`（無密碼）登入，確認網路：
 
