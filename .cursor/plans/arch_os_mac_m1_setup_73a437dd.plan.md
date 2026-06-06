@@ -10,10 +10,10 @@ todos:
     status: completed
   - id: vmware-scripts
     content: "[VMware 優先] 建立 vmware/scripts/ 下的 arch-chroot-install.sh、post-install.sh"
-    status: in_progress
+    status: completed
   - id: config-files
     content: 建立 config/ 目錄下的 pacman.conf、mirrorlist-arm、locale.gen
-    status: pending
+    status: in_progress
   - id: makefile
     content: "[Docker 次之] 建立根目錄 Makefile — 封裝 docker build/up/shell/clean 等指令"
     status: pending
