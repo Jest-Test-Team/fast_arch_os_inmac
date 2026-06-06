@@ -7,10 +7,10 @@ todos:
     status: completed
   - id: vmware-readme
     content: "[VMware 優先] 建立 vmware/README.md — VMware Fusion 安裝與設定詳細步驟"
-    status: in_progress
+    status: completed
   - id: vmware-scripts
     content: "[VMware 優先] 建立 vmware/scripts/ 下的 arch-chroot-install.sh、post-install.sh"
-    status: pending
+    status: in_progress
   - id: config-files
     content: 建立 config/ 目錄下的 pacman.conf、mirrorlist-arm、locale.gen
     status: pending
