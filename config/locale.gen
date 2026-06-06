@@ -1,0 +1,14 @@
+# /etc/locale.gen — 啟用的 locale 清單
+# 修改後執行 locale-gen 生效
+
+# 英文（美國）— 系統預設，保持啟用
+en_US.UTF-8 UTF-8
+
+# 繁體中文（台灣）— 終端機中文支援
+zh_TW.UTF-8 UTF-8
+
+# 繁體中文（香港）— 可選
+# zh_HK.UTF-8 UTF-8
+
+# 日文 — 可選
+# ja_JP.UTF-8 UTF-8
