@@ -19,13 +19,13 @@ todos:
     status: completed
   - id: dockerfile
     content: "[Docker 次之] 建立 docker/Dockerfile — 基於 archlinux/archlinux:base-devel (ARM64)"
-    status: in_progress
+    status: completed
   - id: compose
     content: "[Docker 次之] 建立 docker/docker-compose.yml — 含 volume、platform、tty 設定"
-    status: pending
+    status: completed
   - id: docker-scripts
     content: "[Docker 次之] 建立 docker/scripts/entrypoint.sh 與 bootstrap.sh"
-    status: pending
+    status: in_progress
 isProject: false
 ---
 
