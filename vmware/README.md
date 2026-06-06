@@ -31,7 +31,24 @@
 
 ---
 
-## 步驟一：建立 VMware 虛擬機
+## 步驟一：下載前置檔案
+
+在 **Mac** 上執行（不是在 VM 內）：
+
+```bash
+bash vmware/scripts/download-deps.sh
+```
+
+腳本會自動：
+- 下載 `alpine-virt-3.23.4-aarch64.iso`（90 MB）至 `downloads/` 目錄
+- 驗證 SHA256 checksum
+- 顯示 VMware Fusion 13.6.4 的手動下載指引（需 Broadcom 帳號）
+
+> VMware Fusion 需手動登入 [Broadcom 下載頁](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware+Fusion) 下載：選 **Release 13.6.4**（Build 533271）
+
+---
+
+## 步驟二：建立 VMware 虛擬機
 
 1. 開啟 VMware Fusion → **File → New**
 2. 選擇 **Create a custom virtual machine**
